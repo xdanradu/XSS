@@ -72,3 +72,35 @@ The setup consists of three separate Express.js applications running locally:
 6.  **CSP Intervention**:
     *   **If CSP is strict**: The `connect-src` directive (or default) does NOT include `localhost:3002`. The browser blocks the request and sends a violation report to `my-estore`'s `/csp-report` endpoint.
     *   **If CSP is weak/missing**: The browser allows the request, and the `attacker` server receives the sensitive data.
+
+### Sequence Diagram
+
+```mermaid
+sequenceDiagram
+    participant User as Browser
+    participant Store as my-estore (:3000)
+    participant Trusted as trusted-app (:4307)
+    participant Attacker as attacker (:3002)
+
+    User->>Store: GET /
+    Store-->>User: index.html + CSP Header
+
+    User->>Trusted: GET /trusted-external-script.js
+    Trusted-->>User: script.js
+
+    Note over User: Script executes & injects widget
+
+    User->>Trusted: GET /widget.html
+    Trusted-->>User: widget.html
+
+    Note over User: User types in input
+
+    User->>Attacker: POST /attacker (Malicious Data Exfiltration)
+    
+    alt CSP allows connection
+        Attacker-->>User: 200 OK (Data Stolen)
+    else CSP blocks connection
+        User--xAttacker: Blocked by CSP
+        User->>Store: POST /csp-report (Violation Report)
+    end
+```
