@@ -1,15 +1,14 @@
 # Start apps
 
-attacker, trusted-external-app, estore
+For all web apps attacker, trusted-external-app, estore execute the following commands:
 
 ```bash
     npm i
     npm run start
 ```
 
-## Enable/disable CSP by commenting/uncommenting the my-estore server.js setHeader and index.html meta tag
+#### my-estore runs on http://localhost:3000/
 
-## Look in the network tab for the attacker POST request and browser/server console for logging of CSP violations
+#### Enable/disable CSP by commenting/uncommenting the my-estore server.js setHeader and index.html meta tag
 
-Visit
-http://127.0.0.1:8080/
+#### Look in the network tab for the attacker POST request and browser/server console for logging of CSP violations
