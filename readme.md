@@ -3,6 +3,7 @@
 attacker, trusted-external-app, estore
 
 ```bash
+    npm i
     npm run start
 ```
 
