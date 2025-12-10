@@ -43,3 +43,4 @@ Thumbs.db
 
 /trusted-external-app/node_modules
 /attacker/node_modules
+/my-estore/node_modules
