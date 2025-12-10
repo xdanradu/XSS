@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>estore</title>
+
+  <!-- Disallow attacker POST request through connect-src
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' http://127.0.0.1:3001; style-src 'self' 'unsafe-inline'; object-src 'none';">
+  -->
+
+  <!-- Allow attacker POST request through connect-src / or just remove the CSP entirely
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self' 'unsafe-inline' http://127.0.0.1:3001; connect-src http://localhost:3002; style-src 'self' 'unsafe-inline'; object-src 'none';">
+ -->
+</head>
+
+<body>
+  <h1>Search something about XSS</h1>
+
+  <input type="text" id="input" placeholder="Type credit card and press Enter"
+    style="width:400px;padding:10px;font-size:16px;">
+  <button onclick="exploit()">Submit</button>
+
+  <div id="output"></div>
+
+  <script>
+    localStorage.setItem('authToken', 'secret-token-123');
+
+    function exploit() {
+      console.log('exploiting XSS vulnerability...');
+      // This is the vulnerable line (real apps sometimes still do this!)
+      document.getElementById('output').innerHTML = document.getElementById('input').value;
+    }
+
+    // Press Enter in the input box to trigger too
+    document.getElementById('input').addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') exploit();
+    });
+  </script>
+  <script src="http://127.0.0.1:3001/trusted-external-script.js"></script>
+</body>
+
+</html>

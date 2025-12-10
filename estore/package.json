@@ -1,0 +1,11 @@
+{
+    "name": "estore",
+    "version": "1.0.0",
+    "description": "XSS Test Estore",
+    "scripts": {
+        "start": "live-server"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC"
+}
