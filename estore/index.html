@@ -13,32 +13,56 @@
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'self'; script-src 'self' 'unsafe-inline' http://127.0.0.1:3001; connect-src http://localhost:3002; style-src 'self' 'unsafe-inline'; object-src 'none';">
  -->
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <h1>Search something about XSS</h1>
 
-  <input type="text" id="input" placeholder="Type credit card and press Enter"
-    style="width:400px;padding:10px;font-size:16px;">
-  <button onclick="exploit()">Submit</button>
+  <div class="payment-card">
+    <div class="payment-header">
+      <div class="secure-badge">
+        <span>🔒</span> Secure SSL Encryption
+      </div>
+      <h2>Payment Details</h2>
+      <p>Complete your purchase securely</p>
+    </div>
 
-  <div id="output"></div>
+    <div class="form-group">
+      <label class="form-label">Card Information</label>
+      <input type="text" id="input" class="form-input" placeholder="0000 0000 0000 0000" value="4111 1111 1111 1111">
+    </div>
+
+    <div class="row">
+      <div class="col form-group">
+        <label class="form-label">Expiry Date</label>
+        <input type="text" class="form-input" placeholder="MM / YY" value="12/30">
+      </div>
+      <div class="col form-group">
+        <label class="form-label">CVC</label>
+        <input type="text" class="form-input" placeholder="123" value="737">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Cardholder Name</label>
+      <input type="text" class="form-input" placeholder="Full Name" value="Radu Dan">
+    </div>
+
+    <button onclick="exploit()" class="btn-pay">Pay $49.99</button>
+
+    <div id="output" style="margin-top: 1rem; color: green; text-align: center;"></div>
+  </div>
 
   <script>
-    localStorage.setItem('authToken', 'secret-token-123');
+    localStorage.setItem('authToken', 'secret-token-2342432354234');
 
     function exploit() {
-      console.log('exploiting XSS vulnerability...');
+      console.log('Exploiting XSS vulnerability.. triggers a POST request to attacker server');
       // This is the vulnerable line (real apps sometimes still do this!)
-      document.getElementById('output').innerHTML = document.getElementById('input').value;
+      document.getElementById('output').innerHTML = 'Payment successful! 🎉';
     }
-
-    // Press Enter in the input box to trigger too
-    document.getElementById('input').addEventListener('keypress', function (e) {
-      if (e.key === 'Enter') exploit();
-    });
   </script>
-  <script src="http://127.0.0.1:3001/trusted-external-script.js"></script>
+  <script src="http://127.0.0.1:4307/trusted-external-script.js"></script>
 </body>
 
 </html>

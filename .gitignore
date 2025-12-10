@@ -41,5 +41,5 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/analytics/node_modules
+/trusted-external-app/node_modules
 /attacker/node_modules

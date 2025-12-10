@@ -1,4 +1,4 @@
-  <!--
+  <!-- simple test with innerHTML
   <img src="x" onerror="alert('XSS!')">
   -->
 
