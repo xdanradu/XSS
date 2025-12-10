@@ -7,6 +7,7 @@ const port = 3000;
 app.use(express.json({ type: ['application/json', 'application/csp-report'] }));
 
 app.use((req, res, next) => {
+    /* Comment the code bellow to allow XSS */
     res.setHeader(
         'Content-Security-Policy',
         "default-src 'self'; script-src 'self' 'unsafe-inline' http://localhost:4307; connect-src http://localhost:4307 http://localhost:3000; style-src 'self' 'unsafe-inline'; object-src 'none'; report-uri /csp-report;"
