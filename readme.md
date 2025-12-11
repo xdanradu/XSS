@@ -1,6 +1,6 @@
-# Start apps
+# Cross Site Scripting (XSS) PoC 
 
-For all web apps attacker, trusted-external-app, estore execute the following commands:
+For all web apps: attacker, trusted-external-app, estore execute the following commands:
 
 ```bash
     npm i
